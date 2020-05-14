@@ -18,8 +18,8 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker-compose -f project/udagram-deployment/docker/docker-compose-build.yaml build --parallel
+  - docker-compose -f udagram-deployment/docker/docker-compose-build.yaml build --parallel
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker-compose -f project/udagram-deployment/docker/docker-compose-build.yaml push
+  - docker-compose -f udagram-deployment/docker/docker-compose-build.yaml push
