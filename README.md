@@ -1,10 +1,45 @@
 # Udagram Image Filtering Application
+![Travice CI Status](https://travis-ci.org/meih/nd9990-c3-project.svg?branch=master)
 
 Udagram is a simple cloud application developed alongside the Udacity Cloud Engineering Nanodegree. It allows users to register and log into a web client, post photos to the feed, and process photos using an image filtering microservice.
 
-The project is split into two parts:
-1. Frontend - Angular web application built with Ionic Framework
-2. Backend RESTful API - Node-Express application
+The project is split into three parts:
+1. [Frontend](./udagram-deployment) - Angular web application built with Ionic Framework
+2. [Backend RESTful Feed API](./udagram-api-feed) - Node-Express application for getting/posting photos
+3. [Backend RESTful User API](./udagram-api-user) - Node-Express application for managing users
+
+## Docker images
+
+In this project, the three parts of the application and reverse proxy are containerized and made available on Docker Hub. These images can be deployed independently.
+
+| Image name | URL |
+|---|---|
+| udagram-api-user | https://hub.docker.com/repository/docker/meiatwork/udagram-api-user |
+| udagram-api-feed | https://hub.docker.com/repository/docker/meiatwork/udagram-api-feed |
+| udagram-frontend | https://hub.docker.com/repository/docker/meiatwork/udagram-frontend |
+| reverseproxy | https://hub.docker.com/repository/docker/meiatwork/reverseproxy |
+
+## CI
+
+Once the repo is updated, Docker images will be rebuilt and pushed to Docker Hub using Travis CI.
+
+## Kubernetes
+
+To deploy this application on Kubernetes as pods, try:
+
+```
+kubectl apply -f udagram-deployment/k8s/backend-feed-deployment.yaml
+kubectl apply -f udagram-deployment/k8s/backend-user-deployment.yaml
+kubectl apply -f udagram-deployment/k8s/frontend-deployment.yaml
+```
+
+And make sure if the pods are running by `kubectl get pods`.
+
+## Screenshots
+
+Screenshots of the app and deployments can be found [here](./screenshots)
+
+----
 
 ## Getting Started
 > _tip_: it's recommended that you start with getting the backend API running since the frontend web application depends on the API.
